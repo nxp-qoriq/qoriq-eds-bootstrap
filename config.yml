@@ -1,0 +1,4 @@
+url_prefix: https://int.b-est.edgescale.org
+name: nxp-bootstrap
+password: nxp123456
+root_ca: 
