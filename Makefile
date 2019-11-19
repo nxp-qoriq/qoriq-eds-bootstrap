@@ -13,6 +13,7 @@ GOPATH ?= $(HOME)/gopathdir
 GOVERSION ?= 1.9.4
 GOFILE ?= go$(GOVERSION).linux-amd64.tar.gz
 GO = $(GOROOT)/bin/go
+EDGESCALE_DOMAIN_SUFFIX ?=
 
 .PHONY: clean all install
 
@@ -29,6 +30,10 @@ goenv:
 		rm -rf $(GOROOT) && tar -C $(HOME) -xzf $(GOFILE); \
 	fi
 	usr=`whoami`; \
+
+	@if [ -n "$(EDGESCALE_DOMAIN_SUFFIX)" ]; then \
+		sed -i "s,url_prefix.*,url_prefix: https://int.b-est.$(EDGESCALE_DOMAIN_SUFFIX)," config.yml; \
+	fi
 
 install:
 	$(INSTALL) -d --mode 755 $(INSTALL_DIR)/usr/local/edgescale/bin
